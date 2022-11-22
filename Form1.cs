@@ -15,7 +15,6 @@ namespace Ceas_binar
         PictureBox[] hourBits = new PictureBox[6];
         PictureBox[] minuteBits = new PictureBox[7];
         PictureBox[] secondBits = new PictureBox[7];
-        int hour, minute, second;
         public Form1()
         {
             InitializeComponent();
@@ -36,34 +35,104 @@ namespace Ceas_binar
             }
             return binaryNumber;
         }
-        private void showTime(int hms, PictureBox[] pictureBoxes)
+        private void hour_Tick()
         {
-            int[] binaryNumber1 = toBinary(hms % 10);
-            int[] binaryNumber2 = toBinary(hms / 10);
-            for (int i = 0; i < pictureBoxes.Length; i++)
+            int hour = DateTime.Now.Hour;
+            int[] binaryNumber1 = toBinary(hour % 10);
+            int[] binaryNumber2 = toBinary(hour / 10);
+            for(int i = 0; i < hourBits.Length; i++)
             {
-                if (i < 4)
+                if(i<4)
                 {
                     if (binaryNumber1[3 - i] == 1)
                     {
-                        pictureBoxes[i].Image = Ceas_binar.Properties.Resources.dsBuffer;
+                        hourBits[i].Image = Ceas_binar.Properties.Resources.dsBuffer;
 
                     }
                     else
                     {
-                        pictureBoxes[i].Image = Ceas_binar.Properties.Resources.c9af8efe164f75b2d3aaebf5534892b0;
+                        hourBits[i].Image = Ceas_binar.Properties.Resources.c9af8efe164f75b2d3aaebf5534892b0;
                     }
                 }
                 else
                 {
                     if (binaryNumber2[7 - i] == 1)
                     {
-                        pictureBoxes[i].Image = Ceas_binar.Properties.Resources.dsBuffer;
+                        hourBits[i].Image = Ceas_binar.Properties.Resources.dsBuffer;
 
                     }
                     else
                     {
-                        pictureBoxes[i].Image = Ceas_binar.Properties.Resources.c9af8efe164f75b2d3aaebf5534892b0;
+                        hourBits[i].Image = Ceas_binar.Properties.Resources.c9af8efe164f75b2d3aaebf5534892b0;
+                    }
+                }
+            }
+
+        }
+
+        private void minute_Tick()
+        {
+            int minute = DateTime.Now.Minute;
+            int[] binaryNumber1 = toBinary(minute % 10);
+            int[] binaryNumber2 = toBinary(minute / 10);
+            for (int i = 0; i < minuteBits.Length; i++)
+            {
+                if (i < 4)
+                {
+                    if (binaryNumber1[3 - i] == 1)
+                    {
+                        minuteBits[i].Image = Ceas_binar.Properties.Resources.dsBuffer;
+
+                    }
+                    else
+                    {
+                        minuteBits[i].Image = Ceas_binar.Properties.Resources.c9af8efe164f75b2d3aaebf5534892b0;
+                    }
+                }
+                else
+                {
+                    if (binaryNumber2[7 - i] == 1)
+                    {
+                        minuteBits[i].Image = Ceas_binar.Properties.Resources.dsBuffer;
+
+                    }
+                    else
+                    {
+                        minuteBits[i].Image = Ceas_binar.Properties.Resources.c9af8efe164f75b2d3aaebf5534892b0;
+                    }
+                }
+            }
+
+        }
+        private void second_Tick()
+        {
+            int second = DateTime.Now.Second;
+            int[] binaryNumber1 = toBinary(second % 10);
+            int[] binaryNumber2 = toBinary(second / 10);
+            for (int i = 0; i < secondBits.Length; i++)
+            {
+                if (i < 4)
+                {
+                    if (binaryNumber1[3 - i] == 1)
+                    {
+                        secondBits[i].Image = Ceas_binar.Properties.Resources.dsBuffer;
+
+                    }
+                    else
+                    {
+                        secondBits[i].Image = Ceas_binar.Properties.Resources.c9af8efe164f75b2d3aaebf5534892b0;
+                    }
+                }
+                else
+                {
+                    if (binaryNumber2[7 - i] == 1)
+                    {
+                        secondBits[i].Image = Ceas_binar.Properties.Resources.dsBuffer;
+
+                    }
+                    else
+                    {
+                        secondBits[i].Image = Ceas_binar.Properties.Resources.c9af8efe164f75b2d3aaebf5534892b0;
                     }
                 }
             }
@@ -71,13 +140,10 @@ namespace Ceas_binar
 
         private void timer1_Tick(object sender, EventArgs e)
         {
-            hour = DateTime.Now.Hour;
-            minute = DateTime.Now.Minute;
-            second = DateTime.Now.Second;
-            label4.Text = DateTime.Now.ToLongTimeString();      
-            showTime(second, secondBits);
-            showTime(minute, minuteBits);
-            showTime(hour, hourBits);
+            label4.Text = DateTime.Now.ToLongTimeString();
+            hour_Tick();
+            minute_Tick();
+            second_Tick();
         }
 
         private void Form1_Load(object sender, EventArgs e)
